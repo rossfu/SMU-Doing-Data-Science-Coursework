@@ -1,0 +1,112 @@
+---
+title: "HW3"
+author: "Eric Ross Fu"
+date: "February 25, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(root.dir = "C:/Users/Ross/Desktop/All SMU Schoolwork/Doing Data Science/Git/awesome-public-datasets/Datasets/titanic.csv", echo = TRUE)
+```
+#1)
+```{r}
+#$ cd "/c/Users/Ross/Desktop/All SMU Schoolwork/Doing Data Science"
+```
+```{r}
+#$ mkdir Git
+```
+```{r}
+#$ cd "/c/Users/Ross/Desktop/All SMU Schoolwork/Doing Data Science/Git"
+```
+######Ross@DESKTOP-207702C MINGW64 ~/Desktop/All SMU Schoolwork/Doing Data Science/Git
+```{r}
+#$ git clone https://github.com/caesar0301/awesome-public-datasets
+```
+```{r}
+#Cloning into 'awesome-public-datasets'...
+#remote: Enumerating objects: 9, done.
+#remote: Counting objects: 100% (9/9), done.
+#remote: Compressing objects: 100% (7/7), done.
+#remote: Total 1710 (delta 4), reused 6 (delta 2), pack-reused 1701
+#Receiving objects: 100% (1710/1710), 637.10 KiB | 3.20 MiB/s, done.
+#Resolving deltas: 100% (1015/1015), done.
+```
+#2a)
+
+```{r}
+df <- read.csv('titanic.csv', header=TRUE)
+```
+#2b)
+```{r}
+sum(df$Sex == 'male')
+```
+```{r}
+sum(df$Sex == 'female')
+```
+```{r}
+barplot(prop.table(table(df$Sex)), main='Frequency of males and females aboard the Titanic', ylab='frequency')
+```
+```{r}
+mean(df$Age, na.rm=T)
+```
+```{r}
+mean(df$Fare)
+```
+```{r}
+mean(df$Survived)
+```
+#3a)
+```{r}
+x <- read.csv('sleep_data_01.csv', header=TRUE, sep=',')
+
+f1 <- function(x) {
+
+median_age <- median(x$Age, na.rm=T)
+min_sleep <- min(x$Duration, na.rm=T)
+max_sleep <- max(x$Duration, na.rm=T)
+mean_RSES <- mean(x$RSES, na.rm=T)
+sd_RSES <- sd(x$RSES, na.rm=T)
+
+report <- data.frame((median_age/5), (mean_RSES/5), (sd_RSES/5), (max_sleep-min_sleep))
+
+col <- c('MedianAge', 'SelfEsteem', 'SE_SD', 'DurationRange')
+
+names(report) <- col
+
+round(report, digits = 2)}
+```
+
+
+#4a)
+```{r}
+library(fivethirtyeight)
+#data(package = "fivethirtyeight")
+```
+#4b)
+```{r}
+df <- fivethirtyeight::college_recent_grads
+```
+#4c)
+```{r}
+vignette("fivethirtyeight", package = "fivethirtyeight")
+#http://fivethirtyeight.com/features/the-economic-guide-to-picking-a-college-major/
+```
+#4d)
+```{r}
+names(df)
+dim(df)
+```
+#5a)
+```{r}
+names(df)
+ncol(df)
+```
+#5b)
+```{r}
+major_count <- table(df$major_category)
+data.frame(major_count)
+```
+```{r}
+par(las=2)
+barplot(major_count, xlab='Count', ylab='Major', main='Major Count of Recent College Graduates', horiz=TRUE)
+```
